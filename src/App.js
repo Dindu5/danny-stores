@@ -1,23 +1,63 @@
-import logo from './logo.svg';
-import './App.css';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
+import { useState, useEffect } from "react";
+
+// Page Imports
+import Home from "./pages/Home";
+import Products from "./pages/Products";
+import Cart from "./pages/Cart";
+import NotFound from "./pages/NotFound";
+import Checkout from "./pages/Checkout";
+
+// Reusable components
+import Navbar from "./components/Navbar";
+
+// Global Stylesheets
+import "./assets/styles/styles.css";
+import "./assets/styles/general.css";
+import Footer from "./components/Footer";
+
+// Commerce Instance
+import { commerce } from "./lib/commerce";
 
 function App() {
+  const [products, setProducts] = useState([]);
+  const [cart, setCart] = useState({});
+
+  const fetchProducts = async () => {
+    const { data } = await commerce.products.list();
+    setProducts(data);
+  };
+
+  const fetchCart = async () => {
+    setCart(await commerce.cart.retrieve());
+  };
+
+  useEffect(() => {
+    fetchProducts();
+    fetchCart();
+  }, []);
+
+  console.log(products);
+  console.log(cart);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Router>
+        <Navbar />
+        <Switch>
+          <Route path="/" exact component={Home} products={products} />
+          <Route path="/products" exact component={Products} />
+          <Route path="/cart" exact component={Cart} />
+          <Route path="/checkout" exact component={Checkout} />
+          <Route path="*" component={NotFound} />
+          <Redirect to="/404" />
+        </Switch>
+        <Footer />
+      </Router>
     </div>
   );
 }
