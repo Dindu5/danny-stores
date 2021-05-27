@@ -12,6 +12,7 @@ import Products from "./pages/Products";
 import Cart from "./pages/Cart";
 import NotFound from "./pages/NotFound";
 import Checkout from "./pages/Checkout";
+import ProductDetails from "./pages/ProductDetails";
 
 // Reusable components
 import Navbar from "./components/Navbar";
@@ -51,6 +52,7 @@ function App() {
         <Switch>
           <Route path="/" exact component={Home} products={products} />
           <Route path="/products" exact component={Products} />
+          <Route path="/product" exact component={ProductDetails} />
           <Route path="/cart" exact component={Cart} />
           <Route path="/checkout" exact component={Checkout} />
           <Route path="*" component={NotFound} />

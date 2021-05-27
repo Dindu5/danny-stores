@@ -3,7 +3,7 @@ function Product({ item }) {
   return (
     <div className="col-md-4 all des">
       <div className="product-item">
-        <Link to={`/products/${item.id}`}>
+        <Link to={`/product`}>
           <img src={item.image} alt={item.name} />
         </Link>
         <div className="down-content">
