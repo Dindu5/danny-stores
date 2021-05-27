@@ -7,7 +7,7 @@ function Navbar() {
         <div className="container">
           <NavLink className="navbar-brand" exact to="/">
             <h2>
-              Sixteen <em>Clothing</em>
+              Danny <em>Stores</em>
             </h2>
           </NavLink>
           <button
