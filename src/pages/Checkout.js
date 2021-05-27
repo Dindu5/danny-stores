@@ -160,7 +160,7 @@ function Checkout() {
                     <span>$250</span>
                   </div>
                   <div class="verified-icon">
-                    <img src="images/shop/verified.png" />
+                    <img src="images/shop/verified.png" alt="icon" />
                   </div>
                 </div>
               </div>
