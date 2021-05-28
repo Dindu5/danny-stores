@@ -1,34 +1,35 @@
 import { Link } from "react-router-dom";
-function Product({ item }) {
+import Skeleton from "react-loading-skeleton";
+
+// Context
+import { useContext } from "react";
+import { CartContext } from "../context/CartContext";
+
+function Product(props) {
+  const { handleAddToCart, response } = useContext(CartContext);
+
+  console.log(response);
   return (
     <div className="col-md-4 all des">
       <div className="product-item">
         <Link to={`/product`}>
-          <img src={item.image} alt={item.name} />
+          {props.item ? (
+            <img src={props.item.media.source} alt={props.item.name} />
+          ) : (
+            <Skeleton height={200} />
+          )}
         </Link>
         <div className="down-content">
-          <Link to={`/products/${item.id}`}>
-            <h4>{item.name}</h4>
+          <Link to={`/products/${props.item.id}`}>
+            <h4>{props.item.name}</h4>
           </Link>
-          <h6>${item.price}</h6>
-          <ul className="stars">
-            <li>
-              <i className="fa fa-star"></i>
-            </li>
-            <li>
-              <i className="fa fa-star"></i>
-            </li>
-            <li>
-              <i className="fa fa-star"></i>
-            </li>
-            <li>
-              <i className="fa fa-star"></i>
-            </li>
-            <li>
-              <i className="fa fa-star"></i>
-            </li>
-          </ul>
-          <button className="button-primary">Add To Cart</button>
+          <h6>{props.item.price.formatted_with_symbol}</h6>
+          <button
+            className="button-primary"
+            onClick={() => handleAddToCart(props.item.id, 1)}
+          >
+            Add To Cart
+          </button>
         </div>
       </div>
     </div>

@@ -1,6 +1,13 @@
 import { NavLink } from "react-router-dom";
 
+// Context
+import { useContext } from "react";
+import { CartContext } from "../context/CartContext";
+
 function Navbar() {
+  const { cart } = useContext(CartContext);
+  console.log(cart);
+
   return (
     <header>
       <nav className="navbar navbar-expand-lg">
@@ -36,7 +43,7 @@ function Navbar() {
               <li className="nav-item">
                 <NavLink className="nav-link" exact to="/cart">
                   Cart
-                  <span className="cart-number">0</span>
+                  <span className="cart-number">{cart.total_items}</span>
                 </NavLink>
               </li>
               <li className="nav-item">

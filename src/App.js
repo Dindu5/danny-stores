@@ -4,7 +4,7 @@ import {
   Route,
   Redirect,
 } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useContext, useEffect } from "react";
 
 // Page Imports
 import Home from "./pages/Home";
@@ -22,35 +22,25 @@ import "./assets/styles/styles.css";
 import "./assets/styles/general.css";
 import Footer from "./components/Footer";
 
-// Commerce Instance
-import { commerce } from "./lib/commerce";
+// Context
+import { ProductContext } from "./context/ProductContext";
+import { CartContext } from "./context/CartContext";
 
 function App() {
-  const [products, setProducts] = useState([]);
-  const [cart, setCart] = useState({});
-
-  const fetchProducts = async () => {
-    const { data } = await commerce.products.list();
-    setProducts(data);
-  };
-
-  const fetchCart = async () => {
-    setCart(await commerce.cart.retrieve());
-  };
+  const { fetchProducts } = useContext(ProductContext);
+  const { fetchCart } = useContext(CartContext);
 
   useEffect(() => {
     fetchProducts();
     fetchCart();
   }, []);
 
-  console.log(products);
-  console.log(cart);
   return (
     <div className="App">
       <Router>
         <Navbar />
         <Switch>
-          <Route path="/" exact component={Home} products={products} />
+          <Route path="/" exact component={Home} />
           <Route path="/products" exact component={Products} />
           <Route path="/product" exact component={ProductDetails} />
           <Route path="/cart" exact component={Cart} />
