@@ -34,7 +34,7 @@ function App() {
     fetchProducts();
     fetchCart();
     generateToken();
-  }, [fetchProducts, fetchCart, generateToken]);
+  }, []);
 
   return (
     <div className="App">

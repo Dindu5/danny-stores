@@ -30,6 +30,7 @@ function ProductDetails(props) {
   useEffect(() => {
     fetchItem(props.match.params.id);
   }, [id]);
+
   return (
     <div className="pt-5">
       <div className="container pt-5">
@@ -93,6 +94,17 @@ function ProductDetails(props) {
               >
                 Add To Cart
               </button>
+              <button
+                className="button-primary add-to-cart"
+                onClick={() => handleAddToCart(item.id, 1)}
+              >
+                Add To Cart
+              </button>
+              <div>
+                <Link className="button-primary add-to-cart" to="/cart">
+                  Go to Cart
+                </Link>
+              </div>
             </div>
           </div>
         </div>

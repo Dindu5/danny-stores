@@ -10,9 +10,13 @@ import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { ProductContext } from "../context/ProductContext";
 
+import { useAlert } from "react-alert";
+
 function Home() {
+  const alert = useAlert();
   const { loading, products } = useContext(ProductContext);
   const substitute = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+  alert.error("Something went wrong fetching your cart!");
   return (
     <div>
       <Hero />

@@ -49,11 +49,6 @@ function Navbar() {
                   <span className="cart-number">{cart.total_items}</span>
                 </NavLink>
               </li>
-              <li className="nav-item">
-                <NavLink className="nav-link" to="/checkout">
-                  Checkout
-                </NavLink>
-              </li>
             </ul>
           </div>
         </div>
