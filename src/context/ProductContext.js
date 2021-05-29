@@ -9,9 +9,15 @@ function ProductContextProvider(props) {
   const [loading, setLoading] = useState(false);
   const fetchProducts = async () => {
     setLoading(true);
-    const { data } = await commerce.products.list();
-    setProducts(data);
-    setLoading(false);
+    try {
+      const { data } = await commerce.products.list();
+      setProducts(data);
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (

@@ -6,8 +6,6 @@ import { CartContext } from "../context/CartContext";
 
 function Navbar() {
   const { cart } = useContext(CartContext);
-  console.log(cart);
-
   return (
     <header>
       <nav className="navbar navbar-expand-lg">
@@ -30,24 +28,29 @@ function Navbar() {
           </button>
           <div className="collapse navbar-collapse" id="navbarResponsive">
             <ul className="navbar-nav ml-auto">
-              <li className="nav-item" activeClassName="active">
-                <NavLink className="nav-link" exact to="/">
+              <li className="nav-item">
+                <NavLink
+                  className="nav-link"
+                  activeClassName="active"
+                  exact
+                  to="/"
+                >
                   Home
                 </NavLink>
               </li>
               <li className="nav-item">
-                <NavLink className="nav-link" exact to="/products">
+                <NavLink className="nav-link" to="/products">
                   Our Products
                 </NavLink>
               </li>
               <li className="nav-item">
-                <NavLink className="nav-link" exact to="/cart">
+                <NavLink className="nav-link" to="/cart">
                   Cart
                   <span className="cart-number">{cart.total_items}</span>
                 </NavLink>
               </li>
               <li className="nav-item">
-                <NavLink className="nav-link" exact to="/checkout">
+                <NavLink className="nav-link" to="/checkout">
                   Checkout
                 </NavLink>
               </li>

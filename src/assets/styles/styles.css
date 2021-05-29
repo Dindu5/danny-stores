@@ -85,7 +85,8 @@ ul.social-icons li a:hover {
   position: relative;
 }
 a.filled-button,
-.button-primary {
+.button-primary,
+.secondary-button {
   background-color: #f33f3f;
   color: #fff !important;
   font-size: 14px;
@@ -96,14 +97,22 @@ a.filled-button,
   display: inline-block;
   transition: all 0.3s;
 }
+.secondary-button {
+  background-color: #121212;
+}
 
 a.filled-button:hover,
-.button-primary:hover {
+.button-primary:hover,
+.secondary-button:hover {
   background-color: #121212;
   color: #fff;
   cursor: pointer;
 }
-.button-primary {
+.secondary-button:hover {
+  color: #f33f3f;
+}
+.button-primary,
+.secondary-button {
   display: block;
 }
 

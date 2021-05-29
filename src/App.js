@@ -28,11 +28,12 @@ import { CartContext } from "./context/CartContext";
 
 function App() {
   const { fetchProducts } = useContext(ProductContext);
-  const { fetchCart } = useContext(CartContext);
+  const { fetchCart, generateToken } = useContext(CartContext);
 
   useEffect(() => {
     fetchProducts();
     fetchCart();
+    generateToken();
   }, []);
 
   return (

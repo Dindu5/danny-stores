@@ -6,9 +6,7 @@ import { useContext } from "react";
 import { CartContext } from "../context/CartContext";
 
 function Product(props) {
-  const { handleAddToCart, response } = useContext(CartContext);
-
-  console.log(response);
+  const { handleAddToCart } = useContext(CartContext);
   return (
     <div className="col-md-4 all des">
       <div className="product-item">

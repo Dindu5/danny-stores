@@ -70,8 +70,6 @@ function Home() {
   //     ],
   //   },
   // ];
-
-  console.log("products", products);
   return (
     <div>
       <Hero />

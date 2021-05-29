@@ -1,4 +1,22 @@
+import { NavLink, Link } from "react-router-dom";
+
+// Context
+import { useContext, useEffect } from "react";
+import { CartContext } from "../context/CartContext";
+
 function CartPage() {
+  const {
+    cart,
+    handleEmptyCart,
+    handleRemoveFromCart,
+    handleUpdateCartQty,
+    generateToken,
+  } = useContext(CartContext);
+  console.log("cart", cart);
+  useEffect(() => {
+    generateToken();
+  }, [cart]);
+
   return (
     <div>
       <div className="page-heading products-heading header-text">
@@ -7,7 +25,7 @@ function CartPage() {
             <div className="col-md-12">
               <div className="text-content">
                 <h4>Shopping Cart</h4>
-                <h2>sixteen products</h2>
+                <h2>Danny Stores</h2>
               </div>
             </div>
           </div>
@@ -20,76 +38,111 @@ function CartPage() {
             <div className="shopping-block">
               <div className="block">
                 <div className="product-list">
-                  <form method="post">
-                    <table className="table">
-                      <thead>
-                        <tr>
-                          <th className="">Item Name</th>
-                          <th className="">Item Price</th>
-                          <th className="">Actions</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr className="">
-                          <td className="">
-                            <div className="product-info">
-                              <img
-                                width="80"
-                                src="https://i.guim.co.uk/img/media/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/master/4171.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=fa5c416cc5ad5ee73b326f246a90134b"
-                                alt=""
-                              />
-                              <a href="#!">SunclassName</a>
-                            </div>
-                          </td>
-                          <td className="">$200.00</td>
-                          <td className="">
-                            <a className="product-remove" href="#!">
-                              Remove
-                            </a>
-                          </td>
-                        </tr>
-                        <tr className="">
-                          <td className="">
-                            <div className="product-info">
-                              <img
-                                width="80"
-                                src="https://i.guim.co.uk/img/media/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/master/4171.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=fa5c416cc5ad5ee73b326f246a90134b"
-                                alt=""
-                              />
-                              <a href="#!">Airspace</a>
-                            </div>
-                          </td>
-                          <td className="">$200.00</td>
-                          <td className="">
-                            <a className="product-remove" href="#!">
-                              Remove
-                            </a>
-                          </td>
-                        </tr>
-                        <tr className="">
-                          <td className="">
-                            <div className="product-info">
-                              <img
-                                width="80"
-                                src="https://i.guim.co.uk/img/media/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/master/4171.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=fa5c416cc5ad5ee73b326f246a90134b"
-                                alt="product"
-                              />
-                              <a href="#!">Bingo</a>
-                            </div>
-                          </td>
-                          <td className="">$200.00</td>
-                          <td className="">
-                            <a className="product-remove" href="#!">
-                              Remove
-                            </a>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                    <a href="/" className="filled-button">
+                  <table className="table">
+                    <thead>
+                      <tr>
+                        <th className="">Item Name</th>
+                        <th>Quantity</th>
+                        <th className="">Item Price</th>
+                        <th className="">Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {cart.line_items ? (
+                        cart.line_items.map((item) => {
+                          return (
+                            <tr className="" key={item.id}>
+                              <td className="">
+                                <div className="product-info">
+                                  <NavLink to="/product">
+                                    <img
+                                      width="80"
+                                      src={item.media.source}
+                                      alt={item.product_name}
+                                    />
+                                  </NavLink>
+                                  <NavLink to="/rpoduct">
+                                    {item.product_name}
+                                  </NavLink>
+                                </div>
+                              </td>
+                              <td>
+                                <div className="product-quantity-slider">
+                                  <button
+                                    className="add-btn"
+                                    onClick={() =>
+                                      handleUpdateCartQty(
+                                        item.id,
+                                        item.quantity - 1
+                                      )
+                                    }
+                                  >
+                                    -
+                                  </button>
+                                  <input
+                                    type="text"
+                                    placeholder={item.quantity}
+                                    onChange={(e) =>
+                                      handleUpdateCartQty(
+                                        item.id,
+                                        e.target.value.trim()
+                                      )
+                                    }
+                                  />
+                                  <button
+                                    className="add-btn"
+                                    onClick={() =>
+                                      handleUpdateCartQty(
+                                        item.id,
+                                        item.quantity + 1
+                                      )
+                                    }
+                                  >
+                                    +
+                                  </button>
+                                </div>
+                              </td>
+                              <td className="">
+                                {item.line_total.formatted_with_symbol}
+                              </td>
+                              <td className="">
+                                <button
+                                  className="secondary-button"
+                                  onClick={() => handleRemoveFromCart(item.id)}
+                                >
+                                  Remove
+                                </button>
+                              </td>
+                            </tr>
+                          );
+                        })
+                      ) : (
+                        <h3>No items in cart</h3>
+                      )}
+                    </tbody>
+                  </table>
+                  <hr className="mt-3" />
+                  <div className="mt-5">
+                    <h5>
+                      <strong>
+                        Cart Total Price :
+                        {cart.subtotal
+                          ? cart.subtotal.formatted_with_symbol
+                          : 0}
+                      </strong>
+                    </h5>
+                  </div>
+                  <div className="d-flex mt-4">
+                    <button
+                      className="secondary-button mr-3"
+                      onClick={() => handleEmptyCart()}
+                    >
+                      Clear Cart
+                    </button>
+                    <Link to="/checkout" className="button-primary">
                       Proceed To Checkout
-                    </a>
-                  </form>
+                    </Link>
+                  </div>
                 </div>
               </div>
             </div>
