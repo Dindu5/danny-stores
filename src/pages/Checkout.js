@@ -1,8 +1,18 @@
 import { commerce } from "../lib/commerce";
 import { CartContext } from "../context/CartContext";
 import { useContext, useEffect, useState } from "react";
+// import { loadStripe } from "@stripe/stripe-js";
+// import {
+//   Elements,
+//   CardElement,
+//   ElementsConsumer,
+// } from "@stripe/react-stripe-js";
+import { PaystackButton } from "react-paystack";
+
+//const stripePromise = loadStripe("...");
 
 function Checkout() {
+  const publicKey = "pk_test_4f8f5ae30de2149b4da6ebf12b7023d1eddf3678";
   const [values, setValues] = useState({
     first_name: "",
     last_name: "",
@@ -117,6 +127,18 @@ function Checkout() {
       option: shippingOption,
     };
     console.log(items);
+  };
+  const componentProps = {
+    email: values.email_address,
+    amount: checkoutToken && parseInt(checkoutToken.live.total.raw) * 100,
+    metadata: {
+      name: `${values.first_name} ${values.last_name}`,
+    },
+    publicKey,
+    text: "Place Order",
+    onSuccess: () =>
+      alert("Thanks for doing business with us! Come back soon!!"),
+    onClose: () => alert("Wait! You need this oil, don't go!!!!"),
   };
 
   return (
@@ -246,62 +268,11 @@ function Checkout() {
                       ))}
                     </select>
                   </div>
+                  <PaystackButton
+                    className="paystack-button"
+                    {...componentProps}
+                  />
                 </form>
-              </div>
-
-              <div className="block">
-                <h4 className="widget-title">Payment Method</h4>
-                <hr />
-                <p>Credit Cart Details (Secure payment)</p>
-                <div className="checkout-product-details">
-                  <div className="payment">
-                    <div className="card-details">
-                      <form className="checkout-form">
-                        <div className="form-group">
-                          <label htmlFor="card-number">
-                            Card Number <span className="required">*</span>
-                          </label>
-                          <input
-                            id="card-number"
-                            className="form-control"
-                            type="tel"
-                            placeholder="•••• •••• •••• ••••"
-                          />
-                        </div>
-                        <div className="form-group half-width padding-right">
-                          <label htmlFor="card-expiry">
-                            Expiry (MM/YY) <span className="required">*</span>
-                          </label>
-                          <input
-                            id="card-expiry"
-                            className="form-control"
-                            type="tel"
-                            placeholder="MM / YY "
-                          />
-                        </div>
-                        <div className="form-group half-width padding-left">
-                          <label htmlFor="card-cvc">
-                            Card Code <span className="required">*</span>
-                          </label>
-                          <input
-                            id="card-cvc"
-                            className="form-control"
-                            type="tel"
-                            maxLength="4"
-                            placeholder="CVC"
-                          />
-                        </div>
-                        <button
-                          type="submit"
-                          onClick={submitForm}
-                          className="button-primary mt-5"
-                        >
-                          Place Order
-                        </button>
-                      </form>
-                    </div>
-                  </div>
-                </div>
               </div>
             </div>
             <div class="col-md-4">

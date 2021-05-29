@@ -1,4 +1,4 @@
-import { NavLink, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 // Context
 import { useContext, useEffect } from "react";
@@ -12,7 +12,6 @@ function CartPage() {
     handleUpdateCartQty,
     generateToken,
   } = useContext(CartContext);
-  console.log("cart", cart);
   useEffect(() => {
     generateToken();
   }, [cart]);
@@ -54,16 +53,16 @@ function CartPage() {
                             <tr className="" key={item.id}>
                               <td className="">
                                 <div className="product-info">
-                                  <NavLink to="/product">
+                                  <Link to={`/product/${item.id}`}>
                                     <img
                                       width="80"
                                       src={item.media.source}
                                       alt={item.product_name}
                                     />
-                                  </NavLink>
-                                  <NavLink to="/rpoduct">
+                                  </Link>
+                                  <Link to={`/product/${item.id}`}>
                                     {item.product_name}
-                                  </NavLink>
+                                  </Link>
                                 </div>
                               </td>
                               <td>

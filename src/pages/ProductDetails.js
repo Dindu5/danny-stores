@@ -1,89 +1,96 @@
-import React from "react";
-// import Product from "../components/Product";
+import { useState, useEffect, useContext } from "react";
+import Product from "../components/Product";
+import { commerce } from "../lib/commerce";
+import parse from "html-react-parser";
+import Skeleton from "react-loading-skeleton";
+import { CartContext } from "../context/CartContext";
+import { Link } from "react-router-dom";
 
-function ProductDetails() {
-  // const items = [
-  //   {
-  //     id: 1,
-  //     name: "Kids 2pkClothFace Masks",
-  //     price: 125000,
-  //     discount: "-20%",
-  //     old_rate: 168000,
-  //     image:
-  //       "https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixid=MXwxMjA3fDB8MHxzZWFyY2h8Mnx8c2hvZXN8ZW58MHx8MHw%3D&ixlib=rb-1.2.1&w=1000&q=80",
-  //   },
-  //   {
-  //     id: 2,
-  //     name: "Kids 2pkClothFace Masks",
-  //     price: 125000,
-  //     discount: "",
-  //     old_rate: "",
-  //     image:
-  //       "https://images.pexels.com/photos/19090/pexels-photo.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-  //   },
-  //   {
-  //     id: 3,
-  //     name: "Kids 2pkClothFace Masks",
-  //     price: 125000,
-  //     discount: "",
-  //     old_rate: "",
-  //     image:
-  //       "https://media.gettyimages.com/photos/sport-shoes-isolated-on-white-background-picture-id1023642306?s=612x612",
-  //   },
-  // ];
+function ProductDetails(props) {
+  const [item, setItem] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const id = props.match.params.id;
+  const { cart, generateToken, handleAddToCart } = useContext(CartContext);
+  useEffect(() => {
+    generateToken();
+  }, [cart]);
+
+  const fetchItem = async (productID) => {
+    setLoading(true);
+    try {
+      const product = await commerce.products.retrieve(productID);
+      setItem(product);
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+  useEffect(() => {
+    fetchItem(props.match.params.id);
+  }, [id]);
   return (
-    <div>
-      <div className="container">
-        <div className="row">
-          <div className="col-12">
-            <h4 className="back-text">Back to shop</h4>
+    <div className="pt-5">
+      <div className="container pt-5">
+        <div className="row pt-5">
+          <div className="col-12 mt-3 mb-5">
+            <button className="d-block secondary-button">
+              <Link style={{ color: "white" }} to="/products/">
+                Back to shop
+              </Link>
+            </button>
           </div>
           <div className="col-md-5">
             <div className="single-product-slider">
-              <img
-                src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixid=MXwxMjA3fDB8MHxzZWFyY2h8Mnx8c2hvZXN8ZW58MHx8MHw%3D&ixlib=rb-1.2.1&w=1000&q=80"
-                alt="Product"
-                data-zoom-image="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixid=MXwxMjA3fDB8MHxzZWFyY2h8Mnx8c2hvZXN8ZW58MHx8MHw%3D&ixlib=rb-1.2.1&w=1000&q=80"
-              />
+              {item.media ? (
+                <img src={item.media.source} alt={item.name} />
+              ) : (
+                <Skeleton height={300} />
+              )}
             </div>
           </div>
           <div className="col-md-7">
             <div className="single-product-details">
-              <h2>Eclipse Crossbody</h2>
-              <p className="product-price">$300</p>
+              {item.name ? (
+                <h2>{item.name}</h2>
+              ) : (
+                <Skeleton height={40} className="mb-2" />
+              )}
+              {item.price ? (
+                <p className="product-price">
+                  {item.price.formatted_with_symbol}
+                </p>
+              ) : (
+                <Skeleton height={30} />
+              )}
+
               <hr />
               <p className="product-description">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Laborum ipsum dicta quod, quia doloremque aut deserunt commodi
-                quis. Totam a consequatur beatae nostrum, earum consequuntur?
-                Eveniet consequatur ipsum dicta recusandae.
-              </p>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Nesciunt, velit, sunt temporibus, nulla accusamus similique
-                sapiente tempora, at atque cumque assumenda minus asperiores est
-                esse sequi dolore magnam. Debitis, explicabo.
+                {item.description ? (
+                  parse(item.description)
+                ) : (
+                  <Skeleton height={420} />
+                )}
               </p>
               <div className="product-quantity">
                 <span>Quantity:</span>
-                <div className="product-quantity-slider">
-                  <button className="add-btn">-</button>
-                  <input type="text" value="0" name="product-quantity" />
-                  <button className="add-btn">+</button>
-                </div>
               </div>
               <div className="product-category">
                 <span>Categories:</span>
                 <ul>
-                  <li>
-                    <a href="product-single.html">Products</a>
-                  </li>
-                  <li>
-                    <a href="product-single.html">Soap</a>
-                  </li>
+                  {item.categories &&
+                    item.categories.map((category) => (
+                      <li>
+                        <a href="product-single.html">{category.name}</a>
+                      </li>
+                    ))}
                 </ul>
               </div>
-              <button className="button-primary add-to-cart">
+              <button
+                className="button-primary add-to-cart"
+                onClick={() => handleAddToCart(item.id, 1)}
+              >
                 Add To Cart
               </button>
             </div>
@@ -93,7 +100,14 @@ function ProductDetails() {
         <h5 className="text-center sub-title">Related Products</h5>
         <hr />
 
-        <div className="row mt-5"></div>
+        <div className="row mt-5">
+          {item.related_products &&
+            item.related_products.map((product) => {
+              return (
+                <Product key={product.id} item={product} loading={loading} />
+              );
+            })}
+        </div>
       </div>
     </div>
   );

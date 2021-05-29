@@ -34,7 +34,7 @@ function App() {
     fetchProducts();
     fetchCart();
     generateToken();
-  }, []);
+  }, [fetchProducts, fetchCart, generateToken]);
 
   return (
     <div className="App">
@@ -43,7 +43,7 @@ function App() {
         <Switch>
           <Route path="/" exact component={Home} />
           <Route path="/products" exact component={Products} />
-          <Route path="/product" exact component={ProductDetails} />
+          <Route path="/product/:id" exact component={ProductDetails} />
           <Route path="/cart" exact component={Cart} />
           <Route path="/checkout" exact component={Checkout} />
           <Route path="*" component={NotFound} />

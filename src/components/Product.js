@@ -10,7 +10,7 @@ function Product(props) {
   return (
     <div className="col-md-4 all des">
       <div className="product-item">
-        <Link to={`/product`}>
+        <Link to={`/product/${props.item.id}`}>
           {props.item ? (
             <img src={props.item.media.source} alt={props.item.name} />
           ) : (
