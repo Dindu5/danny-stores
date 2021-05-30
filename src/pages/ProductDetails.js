@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import Product from "../components/Product";
 
 import parse from "html-react-parser";
@@ -82,7 +82,7 @@ function ProductDetails(props) {
               <div className="product-quantity">
                 <span>Quantity:</span>
               </div>
-              <div className="product-category">
+              <div className="product-category mb-5">
                 <span>Categories:</span>
                 <ul>
                   {item.categories &&
@@ -93,12 +93,21 @@ function ProductDetails(props) {
                     ))}
                 </ul>
               </div>
-              <button
-                className="button-primary add-to-cart"
-                onClick={() => handleAddToCart(item.id, 1)}
-              >
-                Add To Cart
-              </button>
+              {item.image ? (
+                <button
+                  className="snipcart-add-item button-primary"
+                  data-item-id={item.id}
+                  data-item-price={item.price}
+                  data-item-url={`/products`}
+                  data-item-description={item.sub_description}
+                  data-item-image={`${baseUrl}${item.image.url}`}
+                  data-item-name={item.name}
+                >
+                  Add to cart
+                </button>
+              ) : (
+                <Skeleton height={30} />
+              )}
             </div>
           </div>
         </div>
