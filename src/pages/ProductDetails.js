@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 
 import baseUrl from "../api";
 import axios from "axios";
-import formatNaira from "format-to-naira";
+import formatUSD from "format-usd";
 
 function ProductDetails(props) {
   const [item, setItem] = useState([]);
@@ -66,7 +66,9 @@ function ProductDetails(props) {
                 <Skeleton height={40} className="mb-2" />
               )}
               {item.price ? (
-                <p className="product-price">{formatNaira(item.price)}</p>
+                <p className="product-price">
+                  {formatUSD({ amount: item.price })}
+                </p>
               ) : (
                 <Skeleton height={30} />
               )}
