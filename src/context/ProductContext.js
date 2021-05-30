@@ -1,24 +1,10 @@
 import React, { createContext, useState } from "react";
-// Commerce instance
-import { commerce } from "../lib/commerce";
 
 export const ProductContext = createContext();
 
 function ProductContextProvider(props) {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
-  const fetchProducts = async () => {
-    setLoading(true);
-    try {
-      const { data } = await commerce.products.list();
-      setProducts(data);
-      setLoading(false);
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setLoading(false);
-    }
-  };
 
   return (
     <ProductContext.Provider
@@ -27,7 +13,6 @@ function ProductContextProvider(props) {
         setProducts,
         loading,
         setLoading,
-        fetchProducts,
       }}
     >
       {props.children}

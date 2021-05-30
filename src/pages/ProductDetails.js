@@ -1,34 +1,41 @@
 import { useState, useEffect, useContext } from "react";
 import Product from "../components/Product";
-import { commerce } from "../lib/commerce";
+
 import parse from "html-react-parser";
 import Skeleton from "react-loading-skeleton";
-import { CartContext } from "../context/CartContext";
 import { Link } from "react-router-dom";
+
+import baseUrl from "../api";
+import axios from "axios";
+import formatNaira from "format-to-naira";
 
 function ProductDetails(props) {
   const [item, setItem] = useState([]);
   const [loading, setLoading] = useState(false);
   const id = props.match.params.id;
-  const { cart, generateToken, handleAddToCart } = useContext(CartContext);
-  useEffect(() => {
-    generateToken();
-  }, [cart]);
 
-  const fetchItem = async (productID) => {
-    setLoading(true);
-    try {
-      const product = await commerce.products.retrieve(productID);
-      setItem(product);
-      setLoading(false);
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setLoading(false);
-    }
-  };
   useEffect(() => {
-    fetchItem(props.match.params.id);
+    const fetchProduct = () => {
+      setLoading(true);
+      axios
+        .get(`${baseUrl}/products/${id}`)
+        .then((res) => {
+          console.log("res", res);
+          setItem(res.data);
+          console.log(res.data);
+          setLoading(false);
+        })
+        .catch((err) => {
+          if (err.request) {
+            console.log(err);
+            console.log(err.response);
+          } else {
+            console.log(err.response);
+          }
+          // alert.error("Something went wrong fetching products!");
+        });
+    };
+    fetchProduct();
   }, [id]);
 
   return (
@@ -44,8 +51,8 @@ function ProductDetails(props) {
           </div>
           <div className="col-md-5">
             <div className="single-product-slider">
-              {item.media ? (
-                <img src={item.media.source} alt={item.name} />
+              {item.image ? (
+                <img src={`${baseUrl}${item.image.url}`} alt={item.name} />
               ) : (
                 <Skeleton height={300} />
               )}
@@ -59,9 +66,7 @@ function ProductDetails(props) {
                 <Skeleton height={40} className="mb-2" />
               )}
               {item.price ? (
-                <p className="product-price">
-                  {item.price.formatted_with_symbol}
-                </p>
+                <p className="product-price">{formatNaira(item.price)}</p>
               ) : (
                 <Skeleton height={30} />
               )}
@@ -94,17 +99,6 @@ function ProductDetails(props) {
               >
                 Add To Cart
               </button>
-              <button
-                className="button-primary add-to-cart"
-                onClick={() => handleAddToCart(item.id, 1)}
-              >
-                Add To Cart
-              </button>
-              <div>
-                <Link className="button-primary add-to-cart" to="/cart">
-                  Go to Cart
-                </Link>
-              </div>
             </div>
           </div>
         </div>

@@ -5,13 +5,12 @@ import {
   Redirect,
 } from "react-router-dom";
 import { useContext, useEffect } from "react";
+import axios from "axios";
 
 // Page Imports
 import Home from "./pages/Home";
 import Products from "./pages/Products";
-import Cart from "./pages/Cart";
 import NotFound from "./pages/NotFound";
-import Checkout from "./pages/Checkout";
 import ProductDetails from "./pages/ProductDetails";
 
 // Reusable components
@@ -24,17 +23,34 @@ import Footer from "./components/Footer";
 
 // Context
 import { ProductContext } from "./context/ProductContext";
-import { CartContext } from "./context/CartContext";
+import { useAlert } from "react-alert";
+
+import baseUrl from "./api";
 
 function App() {
-  const { fetchProducts } = useContext(ProductContext);
-  const { fetchCart, generateToken } = useContext(CartContext);
+  const alert = useAlert();
+  const { setProducts } = useContext(ProductContext);
 
   useEffect(() => {
-    fetchProducts();
-    fetchCart();
-    generateToken();
-  }, []);
+    const fetchPro = () => {
+      axios
+        .get(`${baseUrl}/products`)
+        .then((res) => {
+          console.log("res", res);
+          setProducts(res.data);
+        })
+        .catch((err) => {
+          if (err.request) {
+            console.log(err);
+            console.log(err.response);
+          } else {
+            console.log(err.response);
+          }
+          alert.error("Something went wrong fetching products!");
+        });
+    };
+    fetchPro();
+  }, [alert, setProducts]);
 
   return (
     <div className="App">
@@ -44,8 +60,6 @@ function App() {
           <Route path="/" exact component={Home} />
           <Route path="/products" exact component={Products} />
           <Route path="/product/:id" exact component={ProductDetails} />
-          <Route path="/cart" exact component={Cart} />
-          <Route path="/checkout" exact component={Checkout} />
           <Route path="*" component={NotFound} />
           <Redirect to="/404" />
         </Switch>

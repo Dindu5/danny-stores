@@ -1,18 +1,20 @@
 import { Link } from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
+import formatNaira from "format-to-naira";
 
 // Context
-import { useContext } from "react";
-import { CartContext } from "../context/CartContext";
+import baseUrl from "../api";
 
 function Product(props) {
-  const { handleAddToCart } = useContext(CartContext);
   return (
     <div className="col-md-4 all des">
       <div className="product-item">
         <Link to={`/product/${props.item.id}`}>
           {props.item ? (
-            <img src={props.item.media.source} alt={props.item.name} />
+            <img
+              src={`${baseUrl}${props.item.image.url}`}
+              alt={props.item.name}
+            />
           ) : (
             <Skeleton height={200} />
           )}
@@ -21,12 +23,17 @@ function Product(props) {
           <Link to={`/products/${props.item.id}`}>
             <h4>{props.item.name}</h4>
           </Link>
-          <h6>{props.item.price.formatted_with_symbol}</h6>
+          <h6>{formatNaira(props.item.price)}</h6>
           <button
-            className="button-primary"
-            onClick={() => handleAddToCart(props.item.id, 1)}
+            className="snipcart-add-item button-primary"
+            data-item-id={props.item.id}
+            data-item-price={props.item.price}
+            data-item-url={`/product/${props.item.id}`}
+            data-item-description={props.item.sub_description}
+            data-item-image={`${baseUrl}${props.item.image.url}`}
+            data-item-name={props.item.name}
           >
-            Add To Cart
+            Add to cart
           </button>
         </div>
       </div>

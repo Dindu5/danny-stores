@@ -1,13 +1,72 @@
-import React from "react";
+import { useEffect, useState } from "react";
 import Product from "../components/Product";
+import baseUrl from "../api";
 
 // Context
-import { useContext } from "react";
+import { useContext, useRef } from "react";
 import { ProductContext } from "../context/ProductContext";
+import ProductSkeleton from "../components/ProductSkeleton";
+import axios from "axios";
 
 function Products() {
-  const { loading, products } = useContext(ProductContext);
-  // const substitute = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+  const { products } = useContext(ProductContext);
+  const [categories, setCategories] = useState([]);
+  const [currentProducts, setCurrentProducts] = useState([]);
+  const substitute = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+  // const [category, setcategory] = useState('all')
+
+  const list = useRef();
+
+  useEffect(() => {
+    const fetchProductCategories = () => {
+      axios
+        .get(`${baseUrl}/categories/`)
+        .then((res) => {
+          console.log("res", res);
+          console.log(res.data);
+          setCategories(res.data);
+        })
+        .catch((err) => {
+          if (err.request) {
+            console.log(err);
+            console.log(err.response);
+          } else {
+            console.log(err.response);
+          }
+          // alert.error("Something went wrong fetching products!");
+        });
+    };
+
+    fetchProductCategories();
+    setCurrentProducts(products);
+  }, [products]);
+
+  const fetchCategory = (id) => {
+    axios
+      .get(`${baseUrl}/categories/${id}`)
+      .then((res) => {
+        console.log("res", res);
+        setCurrentProducts(res.data.products);
+      })
+      .catch((err) => {
+        if (err.request) {
+          console.log(err);
+          console.log(err.response);
+        } else {
+          console.log(err.response);
+        }
+        // alert.error("Something went wrong fetching products!");
+      });
+  };
+
+  const captureClick = (e) => {
+    const listElements = Array.from(list.current.children);
+    listElements.forEach((listElement) => {
+      listElement.classList.remove("active");
+    });
+    console.log(e);
+    e.target.classList.add("active");
+  };
 
   return (
     <div>
@@ -28,28 +87,37 @@ function Products() {
           <div className="row">
             <div className="col-md-12">
               <div className="filters">
-                <ul>
-                  <li className="active" data-filter="*">
+                <ul onClick={(e) => captureClick(e)} ref={list}>
+                  <li
+                    className="active"
+                    onClick={() => {
+                      setCurrentProducts(products);
+                    }}
+                  >
                     All Products
                   </li>
-                  <li data-filter=".des">Featured</li>
-                  <li data-filter=".dev">Flash Deals</li>
-                  <li data-filter=".gra">Last Minute</li>
+                  {categories.length > 0 &&
+                    categories.map((category) => (
+                      <li
+                        key={category.id}
+                        onClick={() => fetchCategory(category.id)}
+                      >
+                        {category.name}
+                      </li>
+                    ))}
                 </ul>
               </div>
             </div>
             <div className="col-md-12">
               <div className="filters-content">
                 <div className="row grid">
-                  {products.map((product) => {
-                    return (
-                      <Product
-                        key={product.id}
-                        item={product}
-                        loading={loading}
-                      />
-                    );
-                  })}
+                  {currentProducts.length > 0
+                    ? currentProducts.map((product) => {
+                        return <Product key={product.id} item={product} />;
+                      })
+                    : substitute.map((product) => {
+                        return <ProductSkeleton key={product} />;
+                      })}
                 </div>
               </div>
             </div>

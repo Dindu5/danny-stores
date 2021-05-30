@@ -2,7 +2,6 @@ import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
 import ProductContextProvider from "./context/ProductContext";
-import CartContextProvider from "./context/CartContext";
 
 import { transitions, positions, Provider as AlertProvider } from "react-alert";
 import AlertTemplate from "react-alert-template-basic";
@@ -17,11 +16,9 @@ const options = {
 ReactDOM.render(
   <React.StrictMode>
     <ProductContextProvider>
-      <CartContextProvider>
-        <AlertProvider template={AlertTemplate} {...options}>
-          <App />
-        </AlertProvider>
-      </CartContextProvider>
+      <AlertProvider template={AlertTemplate} {...options}>
+        <App />
+      </AlertProvider>
     </ProductContextProvider>
   </React.StrictMode>,
   document.getElementById("root")
