@@ -25,9 +25,9 @@ function Product(props) {
             className="snipcart-add-item button-primary"
             data-item-id={props.item.id}
             data-item-price={props.item.price}
-            data-item-url={`/product/${props.item.id}`}
+            data-item-url={`https://daniel-ecommerce-backend.herokuapp.com/snipcartParser`}
             data-item-description={props.item.sub_description}
-            data-item-image={`${baseUrl}${props.item.image.url}`}
+            data-item-image={props.item.image_url}
             data-item-name={props.item.name}
           >
             Add to cart

@@ -102,7 +102,7 @@ function ProductDetails(props) {
                   data-item-price={item.price}
                   data-item-url={`https://daniel-ecommerce-backend.herokuapp.com/snipcartParser`}
                   data-item-description={item.sub_description}
-                  data-item-image={`${baseUrl}${item.image.url}`}
+                  data-item-image={item.image_url}
                   data-item-name={item.name}
                 >
                   Add to cart
