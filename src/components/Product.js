@@ -11,10 +11,7 @@ function Product(props) {
       <div className="product-item">
         <Link to={`/product/${props.item.id}`}>
           {props.item ? (
-            <img
-              src={`${baseUrl}${props.item.image.url}`}
-              alt={props.item.name}
-            />
+            <img src={props.item.image_url} alt={props.item.name} />
           ) : (
             <Skeleton height={200} />
           )}

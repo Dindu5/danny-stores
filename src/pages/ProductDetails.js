@@ -52,7 +52,7 @@ function ProductDetails(props) {
           <div className="col-md-5">
             <div className="single-product-slider">
               {item.image ? (
-                <img src={`${baseUrl}${item.image.url}`} alt={item.name} />
+                <img src={item.image_url} alt={item.name} />
               ) : (
                 <Skeleton height={300} />
               )}

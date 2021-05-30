@@ -72,7 +72,7 @@
 
 .single-product-slider img {
   height: 22rem;
-  object-fit: cover;
+  object-fit: contain;
   width: 100%;
 }
 
