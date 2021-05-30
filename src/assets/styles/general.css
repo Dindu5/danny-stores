@@ -358,3 +358,6 @@
   height: 45px;
   margin-top: 40px;
 }
+.navbar {
+  z-index: 2 !important;
+}

@@ -5200,10 +5200,10 @@ form-data@~2.3.2:
     combined-stream "^1.0.6"
     mime-types "^2.1.12"
 
-format-to-naira@^1.0.5:
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/format-to-naira/-/format-to-naira-1.0.5.tgz#c978162c078252b3f7276900d160f9fd5de429a3"
-  integrity sha512-xuBEgbl6em+kV4FEWS1RxJoaX1FvLGC2PHhA3aNZn/axzC0ONuKsCOr6AKz1fNNc9ThkakxHGuHCk8d413G+VQ==
+format-usd@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/format-usd/-/format-usd-1.0.1.tgz#b5f80cf8d9eab5cf5f94135aa7cee272be5d705c"
+  integrity sha1-tfgM+Nnqtc9flBNap87icr5dcFw=
 
 forwarded@~0.1.2:
   version "0.1.2"

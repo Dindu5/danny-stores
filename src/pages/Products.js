@@ -121,7 +121,7 @@ function Products() {
                 </div>
               </div>
             </div>
-            <div className="col-md-12">
+            {/* <div className="col-md-12">
               <ul className="pages">
                 <li>
                   <a href="/">1</a>
@@ -141,7 +141,7 @@ function Products() {
                   </a>
                 </li>
               </ul>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
-import formatNaira from "format-to-naira";
+import formatUSD from "format-usd";
 
 // Context
 import baseUrl from "../api";
@@ -23,7 +23,7 @@ function Product(props) {
           <Link to={`/products/${props.item.id}`}>
             <h4>{props.item.name}</h4>
           </Link>
-          <h6>{formatNaira(props.item.price)}</h6>
+          <h6>{formatUSD({ amount: props.item.price })}</h6>
           <button
             className="snipcart-add-item button-primary"
             data-item-id={props.item.id}

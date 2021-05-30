@@ -39,8 +39,8 @@ function ProductDetails(props) {
   }, [id]);
 
   return (
-    <div className="pt-5">
-      <div className="container pt-5">
+    <div>
+      <div className="container">
         <div className="row pt-5">
           <div className="col-12 mt-3 mb-5">
             <button className="d-block secondary-button">
@@ -98,7 +98,7 @@ function ProductDetails(props) {
                   className="snipcart-add-item button-primary"
                   data-item-id={item.id}
                   data-item-price={item.price}
-                  data-item-url={`/products`}
+                  data-item-url={`https://daniel-ecommerce-backend.herokuapp.com/snipcartParser`}
                   data-item-description={item.sub_description}
                   data-item-image={`${baseUrl}${item.image.url}`}
                   data-item-name={item.name}

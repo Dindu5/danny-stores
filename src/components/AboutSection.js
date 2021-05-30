@@ -6,48 +6,30 @@ function AboutSection() {
         <div className="row">
           <div className="col-md-12">
             <div className="section-heading">
-              <h2>About Sixteen Clothing</h2>
+              <h2>About Daniel Stores</h2>
             </div>
           </div>
           <div className="col-md-6">
             <div className="left-content">
-              <h4>Looking for the best products?</h4>
+              <h4>Looking for the best products ?</h4>
               <p>
-                <a
-                  rel="nofollow"
-                  href="https://templatemo.com/tm-546-sixteen-clothing"
-                  target="_parent"
-                >
-                  This template
-                </a>
-                is free to use for your business websites. However, you have no
-                permission to redistribute the downloadable ZIP file on any
-                template collection website.
-                <a rel="nofollow" href="https://templatemo.com/contact">
-                  Contact us
-                </a>{" "}
-                for more info.
+                We are an online store where you can purchase all your
+                electronics, as well as home appliances, fashion items for men,
+                women, and children; cool gadgets, computers,and more on the go.
+                What more? You can have them delivered directly to you. Shop
+                online with great ease as you pay with SnipCart Pay which
+                guarantees you the safest online shopping payment method,
+                allowing you to make stress free payments. Whatever it is you
+                wish to buy, Daniel Stores offers you all and lots more at
+                prices which you can trust. Daniel stores has payment options
+                for everyone irrespective of taste, class, and preferences.
               </p>
               <ul className="featured-list">
-                <li>
-                  <a href="/">Lorem ipsum dolor sit amet</a>
-                </li>
-                <li>
-                  <a href="/">Consectetur an adipisicing elit</a>
-                </li>
-                <li>
-                  <a href="/">It aquecorporis nulla aspernatur</a>
-                </li>
-                <li>
-                  <a href="/">Corporis, omnis doloremque</a>
-                </li>
-                <li>
-                  <a href="/">Non cum id reprehenderit</a>
-                </li>
+                <li>Snip cart payment integration</li>
+                <li>Free Shipping</li>
+                <li>Order recipts</li>
+                <li>Best Prices</li>
               </ul>
-              <a href="about.html" className="filled-button">
-                Read More
-              </a>
             </div>
           </div>
           <div className="col-md-6">

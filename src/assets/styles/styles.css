@@ -245,8 +245,7 @@ a.filled-button:hover,
 
 /* Header Style */
 header {
-  position: absolute;
-  z-index: 99999;
+  z-index: 1;
   width: 100%;
   height: 80px;
   background-color: #232323;
@@ -326,6 +325,11 @@ header .navbar {
   padding-bottom: 25px;
   border-bottom: 3px solid #f33f3f;
 }
+.snipcart-checkout {
+  background-color: transparent !important;
+  color: white;
+  margin-top: -5px;
+}
 .navbar .navbar-toggler-icon {
   background-image: none;
 }
@@ -351,7 +355,6 @@ header .navbar {
 .banner {
   position: relative;
   text-align: center;
-  padding-top: 80px;
 }
 
 .banner-item-01 {
@@ -928,6 +931,11 @@ footer .inner-content p a {
   border-bottom: 1px solid #eee;
   padding: 15px 0px;
 }
+.snipcart-checkout {
+  background-color: transparent !important;
+  color: white;
+  margin-top: 5px;
+}
 
 /* Responsive Style */
 @media (max-width: 768px) {
@@ -964,8 +972,6 @@ footer .inner-content p a {
   }
   .product-item .down-content h4 {
     margin-bottom: 20px !important;
-  }
-  .product-item .down-content h6 {
   }
   .product-item .down-content span {
     position: absolute !important;
