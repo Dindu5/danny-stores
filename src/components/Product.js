@@ -2,9 +2,6 @@ import { Link } from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
 import formatUSD from "format-usd";
 
-// Context
-import baseUrl from "../api";
-
 function Product(props) {
   return (
     <div className="col-md-4 all des">
