@@ -51,7 +51,7 @@ function ProductDetails(props) {
           </div>
           <div className="col-md-5">
             <div className="single-product-slider">
-              {item.image ? (
+              {item.image_url ? (
                 <img src={item.image_url} alt={item.name} />
               ) : (
                 <Skeleton height={300} />
@@ -95,7 +95,7 @@ function ProductDetails(props) {
                     ))}
                 </ul>
               </div>
-              {item.image ? (
+              {item.image_url ? (
                 <button
                   className="snipcart-add-item button-primary"
                   data-item-id={item.id}
