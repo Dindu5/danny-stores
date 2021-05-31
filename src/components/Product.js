@@ -4,7 +4,7 @@ import formatUSD from "format-usd";
 
 function Product(props) {
   return (
-    <div className="col-md-4 all des">
+    <div className="col-lg-4 col-sm-6 all des">
       <div className="product-item">
         <Link to={`/product/${props.item.id}`}>
           {props.item ? (
@@ -14,10 +14,13 @@ function Product(props) {
           )}
         </Link>
         <div className="down-content">
-          <Link to={`/products/${props.item.id}`}>
-            <h4>{props.item.name}</h4>
-          </Link>
-          <h6>{formatUSD({ amount: props.item.price })}</h6>
+          <div>
+            <Link to={`/products/${props.item.id}`}>
+              <h4>{props.item.name}</h4>
+            </Link>
+            <h6>{formatUSD({ amount: props.item.price })}</h6>
+          </div>
+
           <button
             className="snipcart-add-item button-primary"
             data-item-id={props.item.id}

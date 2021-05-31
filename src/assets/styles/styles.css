@@ -1,16 +1,10 @@
-/*
-
-TemplateMo 546 Sixteen Clothing
-
-https://templatemo.com/tm-546-sixteen-clothing
-
-*/
 body {
   font-family: "Poppins", sans-serif;
   overflow-x: hidden;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #fafbfe;
 }
 p {
   margin-bottom: 0px;
@@ -63,14 +57,14 @@ ul.social-icons li a {
 }
 
 ul.social-icons li a:hover {
-  background-color: #f33f3f;
+  background-color: #ffaf0f;
   color: #fff;
 }
 .cart-number {
   position: absolute;
   top: 0.1rem;
   font-size: 0.6rem;
-  background-color: #f33f3f;
+  background-color: #ffaf0f;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -87,9 +81,10 @@ ul.social-icons li a:hover {
 a.filled-button,
 .button-primary,
 .secondary-button {
-  background-color: #f33f3f;
-  color: #fff !important;
+  background-color: #131313;
+  color: #ffaf0f !important;
   font-size: 14px;
+  font-weight: 600 !important;
   text-transform: capitalize;
   font-weight: 300;
   padding: 10px 20px;
@@ -109,7 +104,7 @@ a.filled-button:hover,
   cursor: pointer;
 }
 .secondary-button:hover {
-  color: #f33f3f;
+  color: #ffaf0f;
 }
 .button-primary,
 .secondary-button {
@@ -150,7 +145,7 @@ a.filled-button:hover,
 }
 
 .page-heading .text-content h4 {
-  color: #f33f3f;
+  color: #ffaf0f;
   font-size: 22px;
   text-transform: uppercase;
   font-weight: 700;
@@ -166,7 +161,7 @@ a.filled-button:hover,
 
 #preloader {
   overflow: hidden;
-  background: #f33f3f;
+  background: #ffaf0f;
   left: 0;
   right: 0;
   top: 0;
@@ -277,7 +272,10 @@ header .navbar {
 .background-header .navbar-nav .nav-link.active,
 .background-header .navbar-nav .nav-link.show,
 .background-header .navbar-nav .show > .nav-link {
-  color: #f33f3f !important;
+  color: #ffaf0f !important;
+}
+.nav-link.active {
+  color: #ffaf0f !important;
 }
 .navbar .navbar-brand {
   float: left;
@@ -296,7 +294,7 @@ header .navbar {
 }
 .navbar .navbar-brand h2 em {
   font-style: normal;
-  color: #f33f3f;
+  color: #ffaf0f;
 }
 #navbarResponsive {
   z-index: 999;
@@ -323,7 +321,7 @@ header .navbar {
 .navbar .navbar-nav .show > .nav-link {
   color: #fff;
   padding-bottom: 25px;
-  border-bottom: 3px solid #f33f3f;
+  border-bottom: 3px solid #ffaf0f;
 }
 .snipcart-checkout {
   background-color: transparent !important;
@@ -345,7 +343,7 @@ header .navbar {
 }
 .navbar .navbar-toggler-icon:after {
   content: "\f0c9";
-  color: #f33f3f;
+  color: #ffaf0f;
   font-size: 18px;
   line-height: 26px;
   font-family: "FontAwesome";
@@ -394,7 +392,7 @@ header .navbar {
 }
 
 .banner .text-content h4 {
-  color: #f33f3f;
+  color: #ffaf0f;
   font-size: 22px;
   text-transform: uppercase;
   font-weight: 700;
@@ -452,30 +450,47 @@ header .navbar {
   text-transform: uppercase;
   font-size: 13px;
   font-weight: 700;
-  color: #f33f3f;
+  color: #ffaf0f;
 }
 
 .product-item {
-  border: 1px solid #eee;
+  background: #ffffff;
+  box-shadow: 0px 0.5px 20px 1px rgba(0, 0, 0, 0.07);
+  border-radius: 10px;
   margin-bottom: 30px;
+  overflow: hidden;
 }
 
 .product-item .down-content {
   padding: 30px;
   position: relative;
+  min-height: 12rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.down-content button {
+  margin: 0 auto !important;
 }
 
 .product-item img {
   width: 100%;
   overflow: hidden;
-  height: 17rem;
+  background-color: #f2f5ff;
+  height: 18rem;
   object-fit: cover;
 }
 
 .product-item .down-content h4 {
   font-size: 17px;
-  color: #1a6692;
+  color: #242424;
+  letter-spacing: 1px;
   margin-bottom: 0.6rem;
+}
+.product-item .down-content h6 {
+  font-size: 18px;
+  color: #141414;
+  font-weight: 700;
 }
 
 .product-item .down-content ul li {
@@ -483,7 +498,7 @@ header .navbar {
 }
 
 .product-item .down-content ul li i {
-  color: #f33f3f;
+  color: #ffaf0f;
   font-size: 14px;
 }
 
@@ -559,11 +574,11 @@ header .navbar {
 }
 
 .best-features ul.featured-list li a:hover {
-  color: #f33f3f;
+  color: #ffaf0f;
 }
 
 .best-features ul.featured-list li a:hover::before {
-  background-color: #f33f3f;
+  background-color: #ffaf0f;
 }
 
 .best-features .filled-button {
@@ -575,7 +590,8 @@ header .navbar {
 .call-to-action .inner-content {
   margin-top: 60px;
   padding: 30px;
-  background-color: #f7f7f7;
+  background-color: #ffffff;
+  box-shadow: 0px 0.5px 20px 1px rgba(0, 0, 0, 0.07);
   border-radius: 5px;
 }
 
@@ -615,7 +631,7 @@ footer .inner-content p {
 }
 
 footer .inner-content p a {
-  color: #f33f3f;
+  color: #ffaf0f;
   margin-left: 3px;
 }
 
@@ -645,7 +661,7 @@ footer .inner-content p a {
 
 .products .filters ul li.active,
 .products .filters ul li:hover {
-  color: #f33f3f;
+  color: #ffaf0f;
 }
 
 .products ul.pages {
@@ -672,8 +688,8 @@ footer .inner-content p a {
 
 .products ul.pages li a:hover,
 .products ul.pages li.active a {
-  background-color: #f33f3f;
-  border-color: #f33f3f;
+  background-color: #ffaf0f;
+  border-color: #ffaf0f;
   color: #fff;
 }
 
@@ -731,7 +747,7 @@ footer .inner-content p a {
   li
   a:hover {
   background-color: #fff;
-  color: #f33f3f;
+  color: #ffaf0f;
 }
 
 .team-member:hover .hover-effect {
@@ -748,7 +764,7 @@ footer .inner-content p a {
 .team-member .down-content span {
   display: block;
   font-size: 13px;
-  color: #f33f3f;
+  color: #ffaf0f;
   font-weight: 500;
   margin-bottom: 20px;
 }
@@ -779,7 +795,7 @@ footer .inner-content p a {
   display: inline-block;
   text-align: center;
   line-height: 100px;
-  background-color: #f33f3f;
+  background-color: #ffaf0f;
   color: #fff;
   font-size: 32px;
 }
@@ -879,7 +895,7 @@ footer .inner-content p a {
 }
 
 .contact-form button.filled-button {
-  background-color: #f33f3f;
+  background-color: #ffaf0f;
   color: #fff;
   font-size: 14px;
   text-transform: capitalize;
@@ -911,11 +927,11 @@ footer .inner-content p a {
 }
 
 .accordion a:hover {
-  color: #f33f3f !important;
+  color: #ffaf0f !important;
 }
 
 .accordion a.active {
-  color: #f33f3f !important;
+  color: #ffaf0f !important;
 }
 
 .accordion li .content {
@@ -1020,7 +1036,7 @@ footer .inner-content p a {
     display: none;
   }
   #navbarResponsive {
-    z-index: 99999;
+    z-index: 9;
     position: absolute;
     top: 80px;
     left: 0;
@@ -1044,9 +1060,18 @@ footer .inner-content p a {
   .navbar .navbar-nav .nav-link.active,
   .navbar .navbar-nav .nav-link.show,
   .navbar .navbar-nav .show > .nav-link {
-    color: #f33f3f !important;
+    color: #ffaf0f !important;
     border-bottom: none !important;
     padding-bottom: 15px;
+  }
+  .snipcart-checkout {
+    padding: 15px 0px;
+    color: #1e1e1e !important;
+    width: 100%;
+    margin: auto;
+  }
+  .snipcart-checkout:hover {
+    cursor: pointer;
   }
   .product-item .down-content h4 {
     margin-bottom: 0.3rem;

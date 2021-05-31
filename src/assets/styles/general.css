@@ -343,21 +343,7 @@
   border: 1px solid #ced4da !important;
   padding: 1rem !important;
 }
-.paystack-button {
-  cursor: pointer;
-  text-align: center;
-  font-size: 10px;
-  letter-spacing: 0.1rem;
-  text-transform: uppercase;
-  background-color: #f33f3f;
-  font-weight: bold;
-  color: #e0eafc;
-  border: none;
-  border-radius: 5px;
-  width: 10rem;
-  height: 45px;
-  margin-top: 40px;
-}
+
 .navbar {
   z-index: 2 !important;
 }
